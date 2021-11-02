@@ -1,6 +1,6 @@
 from mycroft import MycroftSkill, intent_file_handler
 
-import einkaufsliste_persistence
+from .einkaufsliste_persistence import persistence
 
 class Einkaufsliste(MycroftSkill):
     def __init__(self):
@@ -9,7 +9,7 @@ class Einkaufsliste(MycroftSkill):
     @intent_file_handler('einkaufsliste.intent')
     def handle_einkaufsliste(self, message):
         item = message.data.get('item')
-        response = einkaufsliste_persistence.persistence.createItem(item)
+        response = persistence.createItem(item)
         self.speak_dialog('einkaufsliste', data={
             'item': response
         })
