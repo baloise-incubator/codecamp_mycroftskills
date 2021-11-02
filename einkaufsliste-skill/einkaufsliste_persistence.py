@@ -18,17 +18,16 @@ class persistence:
         amount = int(doc_ref.get({'amount'}).get('amount') or 0)
         if amount != 0:
             doc_ref.set({
-                u'amount': f'{amount + 1}',
+                u'amount': f'{amount - 1}',
             })
+            return doc_ref.get({'amount'}).get('amount')
         else:
             return "fail"
-
-        return doc_ref.id + " " + doc_ref.get({'amount'}).get('amount')
 
 if __name__ == '__main__':
     persistence = persistence()
 
     while True:
         item = (input("item: "))
-        result = persistence.createItem(item)
+        result = persistence.removeItem(item)
         print(result)
