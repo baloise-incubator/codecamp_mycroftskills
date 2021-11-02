@@ -20,8 +20,12 @@ class Einkaufsliste(MycroftSkill):
         item = message.data.get('item')
         persistenceInstance = persistence()
         response = persistenceInstance.removeItem(item,self.file_system.path)
-
-        self.speak_dialog('loescheinkaufsliste', data={
+        if response != "Fehlgeschlagen":
+            self.speak_dialog('loescheinkaufsliste', data={
+            'item': response
+        })
+        else:
+            self.speak_dialog('error', data={
             'item': response
         })   
 
