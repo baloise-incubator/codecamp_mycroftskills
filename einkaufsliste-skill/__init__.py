@@ -9,7 +9,8 @@ class Einkaufsliste(MycroftSkill):
     @intent_file_handler('einkaufsliste.intent')
     def handle_einkaufsliste(self, message):
         item = message.data.get('item')
-        response = persistence.createItem(item)
+        persistencee = persistence()
+        response = persistencee.createItem(item,self.file_system.path)
         self.speak_dialog('einkaufsliste', data={
             'item': response
         })
