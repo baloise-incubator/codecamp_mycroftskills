@@ -29,6 +29,7 @@ class persistence:
             return doc_ref.get({'amount'}).get('amount')
         elif amountToSet == 0 and amount > 0:
             doc_ref.delete()
+            return item
         else:
             return "Fehlgeschlagen"
 
