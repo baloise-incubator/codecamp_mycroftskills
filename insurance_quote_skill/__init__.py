@@ -1,4 +1,5 @@
-from mycroft import MycroftSkill, intent_file_handler, util
+from mycroft import MycroftSkill, intent_file_handler
+from mycroft.util.parse import extract_number
 
 from .apiConnector import baloiseApiConnector
 
@@ -12,8 +13,8 @@ class Einkaufsliste(MycroftSkill):
         postalCode =  '4001' #self.get_response('postalCode')
         city = self.get_response('city')
         dateofBirth = '21-10-1990' # self.get_response('dateOfBirth')
-        personsUnder14 = util.extractnumber(util.normalize(self.get_response('personsUnder14'),  lang='de-de'), lang='de-de')
-        personsOver14 = util.extractnumber(util.normalize(self.get_response('personsOver14'),  lang='de-de'), lang='de-de')
+        personsUnder14 = extract_number(self.get_response('personsUnder14'),  lang='de-de')
+        personsOver14 = extract_number(self.get_response('personsOver14'),  lang='de-de')
 
         connector = baloiseApiConnector()
         response = connector.calculateTravelPremium(postalCode, city, canton, dateofBirth, personsUnder14, personsOver14)
