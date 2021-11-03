@@ -20,7 +20,7 @@ class baloiseApiConnector:
                 'personsOver14':int(personsOver14)
             },
             'language':'DE'}
-        response = requests.post(url, json=json)
+        response = requests.post(self.travelAPIUrl, json=json)
         premium = response.json()['payload']['baseData']['premium']
         return premium + " Franken"
 
