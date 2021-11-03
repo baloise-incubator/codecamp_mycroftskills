@@ -1,7 +1,5 @@
 from mycroft import MycroftSkill, intent_file_handler
 
-from .einkaufsliste_persistence import persistence
-
 from .apiConnector import baloiseApiConnector
 
 class Einkaufsliste(MycroftSkill):
