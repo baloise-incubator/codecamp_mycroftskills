@@ -19,7 +19,8 @@ class InsurancePremiumSkill(MycroftSkill):
     }
 
     booleanDict = {
-
+        'yes': True,
+        'no': False
     }
 
     @intent_file_handler('premium_travel.intent')
@@ -52,9 +53,12 @@ class InsurancePremiumSkill(MycroftSkill):
 
         self.log.info(adapt_response)
         if adapt_response == 'yes':
-            annullment_costs = self.ask_yesno('annullment_costs')
-            assistance_baggage = self.ask_yesno('assistance_and_baggage')
-            drive_coverage = self.ask_yesno('drive_coverage')
+            annullment_costs_response = self.ask_yesno('annullment_costs')
+            assistance_baggage_response = self.ask_yesno('assistance_and_baggage')
+            drive_coverage_response = self.ask_yesno('drive_coverage')
+            annullment_costs, confidence = match_one(annullment_costs_response, self.booleanDict)
+            assistance_baggage, confidence = match_one(assistance_baggage_response, self.booleanDict)
+            drive_coverage, confidence = match_one(drive_coverage_response, self.booleanDict)
             try:
                 response = connector.updateCoverages(annullment_costs, assistance_baggage, drive_coverage)
                 nice_response = nice_number(response, lang='de-de')
@@ -62,7 +66,7 @@ class InsurancePremiumSkill(MycroftSkill):
                     'premium': nice_response
                 }, wait=True)
             except:
-                self.speak('Ein Fehler ist aufgetreten - bitte versuche es später erneut', Wait=True)
+                self.speak('Ein Fehler ist aufgetreten - bitte versuche es später erneut', wait=True)
 
         self.speak_dialog('finished')
 
