@@ -10,7 +10,8 @@ class HelloThereSkill(MycroftSkill):
     def initialize(self):
         self.audio_service = AudioService(self.bus)
 
-    location = 'https://www.thesoundarchive.com/play-wav-files.asp?sound=starwars/disturbence.mp3'
+
+    location = 'https://www.thesoundarchive.com/starwars/disturbence.mp3'
 
     @intent_file_handler('hello_there.intent')
     def handle_hello_there(self, message):
