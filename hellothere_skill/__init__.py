@@ -17,18 +17,22 @@ class HelloThereSkill(MycroftSkill):
             'https://www.thesoundarchive.com/starwars/star-wars-theme-song.mp3',
             'https://www.thesoundarchive.com/starwars/star-wars-cantina-song.mp3'
         },
-        'zitat': {}
+        'force': {
+            'https://www.thesoundarchive.com/starwars/disturbence.mp3',
+            'https://www.thesoundarchive.com/starwars/force.mp3',
+            'https://www.thesoundarchive.com/starwars/forcestrong.mp3'
+        }
     }
 
-    disturbance = 'https://www.thesoundarchive.com/starwars/disturbence.mp3'
+    disturbance =
 
     @intent_file_handler('hello_there.intent')
     def handle_hello_there(self, message):
-        self.speak('General Kenobi you are a bold one', wait='True')
-        result = self.get_response('request', lang='en-us')
+        self.speak_dialog('hello_there', wait='True')
+        result = self.get_response('request')
         soundList, confidence = match_one(result, self.soundsDict)
         elementcount = len(soundList)
-        elementToUse = random.randint(0, elementcount)
+        elementToUse = random.randint(0, elementcount -1)
         self.audio_service.play(soundList[elementToUse])
 
 
