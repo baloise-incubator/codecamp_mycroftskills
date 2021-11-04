@@ -17,7 +17,7 @@ class InsurancePremiumSkill(MycroftSkill):
         personsOver14 = extract_number(self.get_response('personsOver14'),  lang='de-de')
 
         connector = baloiseApiConnector()
-        response = connector.calculateTravelPremium(postalCode, city, canton, dateofBirth, personsUnder14, personsOver14, self)
+        response = connector.calculateTravelPremium(postalCode, city, canton, dateofBirth, personsUnder14, personsOver14, self.log)
         self.speak_dialog('praemie_reise', data={
             'premium': response
         })
