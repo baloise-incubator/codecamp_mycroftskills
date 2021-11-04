@@ -25,15 +25,15 @@ class InsurancePremiumSkill(MycroftSkill):
         postalCodeResponse = self.get_response('postalCode')
         postalCode = int(extract_number(postalCodeResponse, lang='de-de'))
         city = self.get_response('city')
-        dateOfBirthResponse = self.get_response('dateOfBirth')
-        dateofBirth = extract_datetime(dateOfBirthResponse, lang='de-de')
+        #dateOfBirthResponse = self.get_response('dateOfBirth')
+        #dateofBirth = extract_datetime(dateOfBirthResponse, lang='de-de')
         personsUnder14Response = self.get_response('personsUnder14')
         personsUnder14 = int(extract_number(personsUnder14Response, lang='de-de'))
         personsOver14Response = self.get_response('personsOver14')
         personsOver14 = int(extract_number(personsOver14Response, lang='de-de'))
 
         connector = baloiseApiConnector()
-        response = connector.calculateTravelPremium(postalCode, city, canton, dateofBirth, personsUnder14, personsOver14, self.log)
+        response = connector.calculateTravelPremium(postalCode, city, canton, '1990-10-10', personsUnder14, personsOver14, self.log)
         nice_response = nice_number(response, lang='de-de')
         self.speak_dialog('praemie_reise', data={
             'premium': nice_response
