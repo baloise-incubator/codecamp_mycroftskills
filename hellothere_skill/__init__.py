@@ -13,15 +13,15 @@ class HelloThereSkill(MycroftSkill):
         self.audio_service = AudioService(self.bus)
 
     soundsDict = {
-        'musik': {
+        'musik': [
             'https://www.thesoundarchive.com/starwars/star-wars-theme-song.mp3',
             'https://www.thesoundarchive.com/starwars/star-wars-cantina-song.mp3'
-        },
-        'force': {
+        ],
+        'force': [
             'https://www.thesoundarchive.com/starwars/disturbence.mp3',
             'https://www.thesoundarchive.com/starwars/force.mp3',
             'https://www.thesoundarchive.com/starwars/forcestrong.mp3'
-        }
+        ]
     }
 
     @intent_file_handler('hello_there.intent')
