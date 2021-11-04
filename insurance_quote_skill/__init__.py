@@ -62,7 +62,7 @@ class InsurancePremiumSkill(MycroftSkill):
             try:
                 response = connector.updateCoverages(annullment_costs, assistance_baggage, drive_coverage)
                 nice_response = nice_number(response, lang='de-de')
-                self.speak_dialog('premium_travel', data={
+                self.speak_dialog('premium_travel_adapted', data={
                     'premium': nice_response
                 }, wait=True)
             except:
