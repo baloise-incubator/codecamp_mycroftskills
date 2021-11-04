@@ -6,6 +6,8 @@ from mycroft.skills.audioservice import AudioService
 class HelloThereSkill(MycroftSkill):
     def __init__(self):
         MycroftSkill.__init__(self)
+
+    def initialize(self):
         self.audio_service = AudioService(self.bus)
 
     location = 'https://www.thesoundarchive.com/play-wav-files.asp?sound=starwars/disturbence.mp3'
