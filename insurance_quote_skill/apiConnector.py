@@ -14,7 +14,7 @@ class baloiseApiConnector:
                 'postalCode':f'{postalCode}',
                 'city':f'{city}',
                 'canton':f'{canton}',
-                'dateOfBirth':f'{dateOfBirth}',
+                'dateOfBirth':f'{birthdate}',
                 'periodStartDate':f'{startDate}',
                 'personsUnder14':int(personsUnder14),
                 'personsOver14':int(personsOver14)
