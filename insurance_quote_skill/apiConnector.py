@@ -8,13 +8,13 @@ class baloiseApiConnector:
 
     def calculateTravelPremium(self, postalCode, city, canton, dateOfBirth, personsUnder14, personsOver14, log):
         startDate = datetime.now().strftime('%Y-%m-%d')
-        birthdate = dateOfBirth.strftime('%Y-%m-%d')
+        #birthdate = dateOfBirth.strftime('%Y-%m-%d')
         json = {'riskRelevantData':
             {
                 'postalCode':f'{postalCode}',
                 'city':f'{city}',
                 'canton':f'{canton}',
-                'dateOfBirth':f'{birthdate}',
+                'dateOfBirth': '10-10-1990',#f'{birthdate}',
                 'periodStartDate':f'{startDate}',
                 'personsUnder14':int(personsUnder14),
                 'personsOver14':int(personsOver14)
@@ -23,7 +23,7 @@ class baloiseApiConnector:
         log.info(json)
         response = requests.post(self.travelAPIUrl, json=json)
         premium = response.json()['payload']['baseData']['premium']
-        return f'{premium}' + " Franken pro Jahr"
+        return premium
 
 if __name__ == '__main__':
 
