@@ -12,7 +12,7 @@ class InsurancePremiumSkill(MycroftSkill):
         canton = 'BS' #self.get_response('canton')
         postalCode =  '4001' #self.get_response('postalCode')
         city = self.get_response('city')
-        dateofBirth = '21-10-1990' # self.get_response('dateOfBirth')
+        dateofBirth = '1990-21-10' # self.get_response('dateOfBirth')
         personsUnder14 = extract_number(self.get_response('personsUnder14'),  lang='de-de')
         personsOver14 = extract_number(self.get_response('personsOver14'),  lang='de-de')
 

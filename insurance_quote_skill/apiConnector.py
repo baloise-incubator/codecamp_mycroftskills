@@ -7,7 +7,7 @@ class baloiseApiConnector:
     travelAPIUrl = 'https://www.baloise.ch/mybaloise-api/public/api/traveloffering/v2/createTravelOffering'
 
     def calculateTravelPremium(self, postalCode, city, canton, dateofBirth, personsUnder14, personsOver14, log):
-        startDate = datetime.now().strftime('%d-%m-%Y')
+        startDate = datetime.now().strftime('%Y-%d-%m')
         json = {'riskRelevantData':
             {
                 'postalCode':f'{postalCode}',
