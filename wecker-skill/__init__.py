@@ -20,6 +20,8 @@ class Wecker(MycroftSkill):
         elementFürDenSatz = str(zahl) + ' ' + zeit
             
         self.schedule_event(self.wecker, int(zahlSekunden), elementFürDenSatz)
+        
+        self.speak('Sie werden jetzt' + ' ' + elementFürDenSatz + ' warten')
 
     def wecker(self, message):
         self.speak(f'{message.data}' + ' sind um')
