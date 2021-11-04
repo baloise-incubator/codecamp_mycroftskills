@@ -3,7 +3,7 @@ from mycroft.util.parse import extract_number
 
 from .apiConnector import baloiseApiConnector
 
-class Einkaufsliste(MycroftSkill):
+class InsurancePremiumSkill(MycroftSkill):
     def __init__(self):
         MycroftSkill.__init__(self)
 
@@ -17,11 +17,11 @@ class Einkaufsliste(MycroftSkill):
         personsOver14 = extract_number(self.get_response('personsOver14'),  lang='de-de')
 
         connector = baloiseApiConnector()
-        response = connector.calculateTravelPremium(postalCode, city, canton, dateofBirth, personsUnder14, personsOver14)
+        response = connector.calculateTravelPremium(postalCode, city, canton, dateofBirth, personsUnder14, personsOver14, self)
         self.speak_dialog('praemie_reise', data={
             'premium': response
         })
 
 def create_skill():
-    return Einkaufsliste()
+    return InsurancePremiumSkill()
 

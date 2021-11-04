@@ -3,11 +3,14 @@
 import requests
 from datetime import datetime
 
+from .__init__ import InsurancePremiumSkill
+
+
 class baloiseApiConnector:
 
     travelAPIUrl = 'https://www.baloise.ch/mybaloise-api/public/api/traveloffering/v2/createTravelOffering'
 
-    def calculateTravelPremium(self, postalCode, city, canton, dateofBirth, personsUnder14, personsOver14):
+    def calculateTravelPremium(self, postalCode, city, canton, dateofBirth, personsUnder14, personsOver14, skill : InsurancePremiumSkill):
         startDate = datetime.now().strftime('%d-%m-%Y')
         json = {'riskRelevantData':
             {
@@ -20,6 +23,7 @@ class baloiseApiConnector:
                 'personsOver14':int(personsOver14)
             },
             'language':'DE'}
+        skill.log.info(json)
         response = requests.post(self.travelAPIUrl, json=json)
         premium = response.json()['payload']['baseData']['premium']
         return premium + " Franken"
