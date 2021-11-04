@@ -10,13 +10,13 @@ class HelloThereSkill(MycroftSkill):
     def initialize(self):
         self.audio_service = AudioService(self.bus)
 
-
-    location = 'https://www.thesoundarchive.com/starwars/disturbence.mp3'
+    # sounds
+    bold_one = 'https://movie-sounds.org/quotes/317/general-kenobi-you-are-a-bold-one.mp3'
+    disturbance = 'https://www.thesoundarchive.com/starwars/disturbence.mp3'
 
     @intent_file_handler('hello_there.intent')
     def handle_hello_there(self, message):
-        self.audio_service.play(self.location)
-        self.speak('und tschüss')
+        self.audio_service.play(self.bold_one)
 
 
 def create_skill():
