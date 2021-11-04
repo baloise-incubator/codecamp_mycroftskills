@@ -25,7 +25,7 @@ class InsurancePremiumSkill(MycroftSkill):
         canton, confidence = match_one(cantonResponse, self.cantonDict)
         postalCodeResponse = self.get_response('postalCode')
         postalCode = int(extract_number(postalCodeResponse, lang='de-de'))
-        city = self.get_response('city')
+        city = self.get_response('city').capitalize()
         try:
             date_of_birth_response = self.get_response('dateOfBirth')
             date_time = extract_datetime(date_of_birth_response, lang='de-de')
