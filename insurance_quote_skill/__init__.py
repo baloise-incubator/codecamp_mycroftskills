@@ -19,14 +19,17 @@ class InsurancePremiumSkill(MycroftSkill):
     def handle_praemie(self, message):
 
         cantonResponse = self.get_response('canton')
-        canton, confidence = match_one(cantonResponse, self.canton_dict)
-        self.log.info('conton confidence: ' + confidence)
-        postalCode = extract_number(self.get_response('postalCode'), lang='de-de')
+        canton, confidence = match_one(cantonResponse, self.cantonDict)
+        postalCodeResponse = self.get_response('postalCode')
+        postalCode = extract_number(postalCodeResponse, lang='de-de')
         city = self.get_response('city')
-        dateofBirth = extract_datetime(self.get_response('dateOfBirth'), lang='de-de')
+        dateOfBirthResponse = self.get_response('dateOfBirth')
+        dateofBirth = extract_datetime(dateOfBirthResponse, lang='de-de')
         self.log.info('Date of Birth' + dateofBirth)
-        personsUnder14 = extract_number(self.get_response('personsUnder14'),  lang='de-de')
-        personsOver14 = extract_number(self.get_response('personsOver14'),  lang='de-de')
+        personsUnder14Response = self.get_response('personsUnder14')
+        personsUnder14 = extract_number(personsUnder14Response, lang='de-de')
+        personsOver14Response = self.get_response('personsOver14')
+        personsOver14 = extract_number(personsOver14Response, lang='de-de')
 
         connector = baloiseApiConnector()
         response = connector.calculateTravelPremium(postalCode, city, canton, dateofBirth, personsUnder14, personsOver14, self.log)
