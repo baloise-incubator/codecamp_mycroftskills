@@ -22,7 +22,7 @@ class baloiseApiConnector:
         log.info(json)
         response = requests.post(self.travelAPIUrl, json=json)
         premium = response.json()['payload']['baseData']['premium']
-        return premium + " Franken"
+        return f'{premium}' + " Franken pro Jahr"
 
 if __name__ == '__main__':
 
