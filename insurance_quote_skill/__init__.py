@@ -18,9 +18,12 @@ class InsurancePremiumSkill(MycroftSkill):
         'Aargau': 'AG'
     }
 
-    @intent_file_handler('praemie_reise.intent')
-    def handle_praemie_reise(self, message):
+    booleanDict = {
 
+    }
+
+    @intent_file_handler('premium_travel.intent')
+    def handle_praemie_reise(self, message):
         cantonResponse = self.get_response('canton')
         canton, confidence = match_one(cantonResponse, self.cantonDict)
         postalCodeResponse = self.get_response('postalCode')
@@ -42,9 +45,26 @@ class InsurancePremiumSkill(MycroftSkill):
         response = connector.calculateTravelPremium(postalCode, city, canton, date_of_birth, persons_under14,
                                                     persons_over14, self.log)
         nice_response = nice_number(response, lang='de-de')
-        self.speak_dialog('praemie_reise', data={
+        self.speak_dialog('premium_travel', data={
             'premium': nice_response
-        })
+        }, Wait=True)
+        adapt_response = self.ask_yesno('premium_adapt')
+
+        if adapt_response == 'yes':
+            annullment_costs = self.ask_yesno('annullment_costs')
+            assistance_baggage = self.ask_yesno('assistance_and_baggage')
+            drive_coverage = self.ask_yesno('drive_coverage')
+            try:
+                response = connector.updateCoverages(annullment_costs, assistance_baggage, drive_coverage)
+                nice_response = nice_number(response, lang='de-de')
+                self.speak_dialog('premium_travel', data={
+                    'premium': nice_response
+                }, Wait=True)
+            except:
+                self.speak('Ein Fehler ist aufgetreten - bitte versuche es später erneut', Wait=True)
+
+        self.speak_dialog('finished')
+
 
 
 def create_skill():
