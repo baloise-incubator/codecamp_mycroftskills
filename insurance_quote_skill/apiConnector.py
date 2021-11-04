@@ -23,23 +23,3 @@ class baloiseApiConnector:
         response = requests.post(self.travelAPIUrl, json=json)
         premium = response.json()['payload']['baseData']['premium']
         return premium
-
-if __name__ == '__main__':
-
-    url = 'https://www.baloise.ch/mybaloise-api/public/api/traveloffering/v2/createTravelOffering'
-    json = {'riskRelevantData':
-                 {
-                     'postalCode':'4001',
-                     'city':'Basel',
-                     'canton':'BS',
-                     'dateOfBirth':'1990-12-22',
-                     'periodStartDate':'2021-11-04',
-                     'personsUnder14':0,
-                     'personsOver14':1
-                 },
-        'language':'DE'}
-
-    response = requests.post(url, json=json)
-    print(response.request.body)
-    print(response.json())
-    print(datetime.now().strftime('%d-%m-%Y'))
