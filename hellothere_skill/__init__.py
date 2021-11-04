@@ -24,8 +24,6 @@ class HelloThereSkill(MycroftSkill):
         }
     }
 
-    disturbance =
-
     @intent_file_handler('hello_there.intent')
     def handle_hello_there(self, message):
         self.speak_dialog('hello_there', wait='True')
