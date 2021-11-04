@@ -1,11 +1,11 @@
 from mycroft import MycroftSkill, intent_file_handler
 
-class Erinnerung(MycroftSkill):
+class Wecker(MycroftSkill):
     def __init__(self):
         MycroftSkill.__init__(self)
 
-    @intent_file_handler('erinnerung.intent')
-    def handle_erinnerung(self, message):
+    @intent_file_handler('wecker.intent')
+    def handle_wecker(self, message):
         zeit = message.data.get('zeit')
         self.schedule_event(self.wecker, int(zeit), zeit)
 
@@ -13,5 +13,5 @@ class Erinnerung(MycroftSkill):
         self.speak(f'{message.data}' + ' sind um')
 
 def create_skill():
-    return Erinnerung()
+    return Wecker()
 
