@@ -47,9 +47,10 @@ class InsurancePremiumSkill(MycroftSkill):
         nice_response = nice_number(response, lang='de-de')
         self.speak_dialog('premium_travel', data={
             'premium': nice_response
-        }, Wait=True)
+        }, wait=True)
         adapt_response = self.ask_yesno('premium_adapt')
 
+        self.log.info(adapt_response)
         if adapt_response == 'yes':
             annullment_costs = self.ask_yesno('annullment_costs')
             assistance_baggage = self.ask_yesno('assistance_and_baggage')
@@ -59,7 +60,7 @@ class InsurancePremiumSkill(MycroftSkill):
                 nice_response = nice_number(response, lang='de-de')
                 self.speak_dialog('premium_travel', data={
                     'premium': nice_response
-                }, Wait=True)
+                }, wait=True)
             except:
                 self.speak('Ein Fehler ist aufgetreten - bitte versuche es später erneut', Wait=True)
 
